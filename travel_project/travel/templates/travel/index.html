@@ -4,21 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Du Lịch</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <!-- CSS thư viện -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- CSS custom -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
-        <a class="navbar-brand fw-bold" href="#">Logo</a>
-        <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#">Trang chủ</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Lịch sử</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Địa điểm</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Liên hệ</a></li>
-        </ul>
-    </nav>
+<header class="header sticky-top bg-white">
+    <div class ="container">
+        <nav class="navbar navbar-expand-lg px-4 py-1">
+            <a class="navbar-brand fw-bold" href="#">Logo</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Trang chủ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Lịch sử</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Địa điểm</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Liên hệ</a>
+                </li>
+            </ul>
+
+            <button class="btn border-0 bg-transparent outline-0 ms-auto" data-bs-toggle="modal" data-bs-target="#authModal">
+                <i class="bi bi-person fs-3"></i>
+            </button>
+        </nav>
+    </div>
 </header>
 
 <!-- Banner -->
@@ -151,76 +172,133 @@
     </div>
 </section>
 
+<!-- Modal đăng ký/đăng nhập -->
+<div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-4 border-0">
+
+            <!-- Header modal -->
+            <div class="modal-header border-0 p-0 mb-3">
+                <h5 id="modalTitle" class="modal-title">Đăng nhập</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Body modal -->
+            <div class="modal-body">
+
+                <!-- Form Đăng nhập -->
+                <div id="loginForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <span>Bạn chưa có tài khoản? </span>
+                        <a href="#" id="showRegisterLink">Đăng ký</a>
+                    </div>
+                    <button class="btn btn-primary w-100">Đăng nhập</button>
+                </div>
+
+                <!-- Form Đăng ký -->
+                <div id="registerForm" class="d-none">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" placeholder="Mật khẩu">
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu">
+                    </div>
+                    <div class="mb-3 text-center">
+                        <span>Bạn đã có tài khoản? </span>
+                        <a href="#" id="showLoginLink">Đăng nhập</a>
+                    </div>
+                    <button class="btn btn-primary w-100">Đăng ký</button>
+                </div>
+
+            </div> <!-- modal-body -->
+        </div>
+    </div>
+</div>
+
+</body>
+
 <script>
-const destinations = [
-  "Đà Lạt",
-  "Đà Nẵng",
-  "Phú Quốc",
-  "Hội An",
-  "Nha Trang",
-  "Hà Nội",
-  "Sapa",
-  "Huế",
-  "Vũng Tàu",
-  "Cần Thơ"
-];
+    const destinations = [
+        "Đà Lạt",
+        "Đà Nẵng",
+        "Phú Quốc",
+        "Hội An",
+        "Nha Trang",
+        "Hà Nội",
+        "Sapa",
+        "Huế",
+        "Vũng Tàu",
+        "Cần Thơ"
+    ];
 
-const searchInput = document.getElementById("searchInput");
-const suggestionsBox = document.getElementById("suggestions");
+    const searchInput = document.getElementById("searchInput");
+    const suggestionsBox = document.getElementById("suggestions");
 
-searchInput.addEventListener("input", function() {
-  const query = this.value.toLowerCase();
-  suggestionsBox.innerHTML = "";
+    searchInput.addEventListener("input", function() {
+        const query = this.value.toLowerCase();
+        suggestionsBox.innerHTML = "";
 
-  if (query.length === 0) {
-    suggestionsBox.style.display = "none";
-    return;
-  }
+        if (query.length === 0) {
+            suggestionsBox.style.display = "none";
+            return;
+        }
 
-  const filtered = destinations.filter(d => d.toLowerCase().includes(query));
-  if (filtered.length === 0) {
-    suggestionsBox.style.display = "none";
-    return;
-  }
+        const filtered = destinations.filter(d => d.toLowerCase().includes(query));
+        if (filtered.length === 0) {
+            suggestionsBox.style.display = "none";
+            return;
+        }
 
-  filtered.forEach(item => {
-    const div = document.createElement("div");
-    div.classList.add("suggestion-item");
+        filtered.forEach(item => {
+            const div = document.createElement("div");
+            div.classList.add("suggestion-item");
 
-    // Làm nổi bật chữ trùng
-    const regex = new RegExp(`(${query})`, "gi");
-    div.innerHTML = item.replace(regex, "<span class='highlight'>$1</span>");
+            // Làm nổi bật chữ trùng
+            const regex = new RegExp(`(${query})`, "gi");
+            div.innerHTML = item.replace(regex, "<span class='highlight'>$1</span>");
 
-    div.addEventListener("click", () => {
-      searchInput.value = item;
-      suggestionsBox.style.display = "none";
+            div.addEventListener("click", () => {
+                searchInput.value = item;
+                suggestionsBox.style.display = "none";
+            });
+            suggestionsBox.appendChild(div);
+        });
+
+        suggestionsBox.style.display = "block";
     });
-    suggestionsBox.appendChild(div);
-  });
 
-  suggestionsBox.style.display = "block";
-});
-
-document.addEventListener("click", (e) => {
-  if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
-    suggestionsBox.style.display = "none";
-  }
-});
+    document.addEventListener("click", (e) => {
+        if (!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+            suggestionsBox.style.display = "none";
+        }
+    });
 </script>
 
 <script>
-// Xử lý nút "Khám phá ngay"
-document.querySelectorAll(".btn-outline-primary").forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const card = e.target.closest(".card");
-    const title = card.querySelector(".card-title").textContent;
-    const desc = card.querySelector(".card-text").textContent;
-    const imgSrc = card.querySelector("img").src;
+    // Xử lý nút "Khám phá ngay"
+    document.querySelectorAll(".btn-outline-primary").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            const card = e.target.closest(".card");
+            const title = card.querySelector(".card-title").textContent;
+            const desc = card.querySelector(".card-text").textContent;
+            const imgSrc = card.querySelector("img").src;
 
-    // Tạo modal tạm thời
-    const modal = document.createElement("div");
-    modal.classList.add("explore-modal");
-    modal.innerHTML = `
+            // Tạo modal tạm thời
+            const modal = document.createElement("div");
+            modal.classList.add("explore-modal");
+            modal.innerHTML = `
     <div class="modal-content">
         <div class="close-icon"><i class="fa-solid fa-xmark"></i></div>
         <img src="${imgSrc}" alt="${title}">
@@ -230,96 +308,115 @@ document.querySelectorAll(".btn-outline-primary").forEach((btn) => {
     </div>
     `;
 
-    document.body.appendChild(modal);
+            document.body.appendChild(modal);
 
-    // Đóng modal
-    modal.querySelector(".close-btn").addEventListener("click", () => {
-        modal.remove();
-    });
-    modal.querySelector(".close-icon").addEventListener("click", () => {
-        modal.remove();
-    });
+            // Đóng modal
+            modal.querySelector(".close-btn").addEventListener("click", () => {
+                modal.remove();
+            });
+            modal.querySelector(".close-icon").addEventListener("click", () => {
+                modal.remove();
+            });
 
-  });
-});
+        });
+    });
 </script>
 
 <script>
-// Khi rê chuột vào hình → chạy slideshow
-document.querySelectorAll('.image-wrapper').forEach(wrapper => {
-  let slides = wrapper.querySelectorAll('.slide');
-  let index = 0;
-  let interval;
+    // Khi rê chuột vào hình → chạy slideshow
+    document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+        let slides = wrapper.querySelectorAll('.slide');
+        let index = 0;
+        let interval;
 
-  function showSlide(n) {
-    slides.forEach(s => s.classList.remove('active'));
-    slides[n].classList.add('active');
-  }
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[n].classList.add('active');
+        }
 
-  // Bắt đầu slideshow khi hover
-  wrapper.addEventListener('mouseenter', () => {
-    interval = setInterval(() => {
-      index = (index + 1) % slides.length;
-      showSlide(index);
-    }, 2000);
-  });
+        // Bắt đầu slideshow khi hover
+        wrapper.addEventListener('mouseenter', () => {
+            interval = setInterval(() => {
+                index = (index + 1) % slides.length;
+                showSlide(index);
+            }, 2000);
+        });
 
-  // Dừng slideshow khi rời chuột
-  wrapper.addEventListener('mouseleave', () => {
-    clearInterval(interval);
-    index = 0;
-    showSlide(index);
-  });
+        // Dừng slideshow khi rời chuột
+        wrapper.addEventListener('mouseleave', () => {
+            clearInterval(interval);
+            index = 0;
+            showSlide(index);
+        });
 
-  // Điều khiển nút trái/phải
-  wrapper.querySelector('.prev').addEventListener('click', () => {
-    index = (index - 1 + slides.length) % slides.length;
-    showSlide(index);
-  });
+        // Điều khiển nút trái/phải
+        wrapper.querySelector('.prev').addEventListener('click', () => {
+            index = (index - 1 + slides.length) % slides.length;
+            showSlide(index);
+        });
 
-  wrapper.querySelector('.next').addEventListener('click', () => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-  });
-});
+        wrapper.querySelector('.next').addEventListener('click', () => {
+            index = (index + 1) % slides.length;
+            showSlide(index);
+        });
+    });
 </script>
 
 <script>
-document.querySelectorAll('.image-wrapper').forEach(wrapper => {
-  const slides = wrapper.querySelectorAll('.slide');
-  let index = 0;
-  let interval;
+    document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+        const slides = wrapper.querySelectorAll('.slide');
+        let index = 0;
+        let interval;
 
-  function showSlide(n) {
-    slides.forEach(s => s.classList.remove('active'));
-    slides[n].classList.add('active');
-  }
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            slides[n].classList.add('active');
+        }
 
-  wrapper.addEventListener('mouseenter', () => {
-    interval = setInterval(() => {
-      index = (index + 1) % slides.length;
-      showSlide(index);
-    }, 10000);
-  });
+        wrapper.addEventListener('mouseenter', () => {
+            interval = setInterval(() => {
+                index = (index + 1) % slides.length;
+                showSlide(index);
+            }, 10000);
+        });
 
-  wrapper.addEventListener('mouseleave', () => {
-    clearInterval(interval);
-    index = 0;
-    showSlide(index);
-  });
+        wrapper.addEventListener('mouseleave', () => {
+            clearInterval(interval);
+            index = 0;
+            showSlide(index);
+        });
 
-  wrapper.querySelector('.prev').addEventListener('click', () => {
-    index = (index - 1 + slides.length) % slides.length;
-    showSlide(index);
-  });
+        wrapper.querySelector('.prev').addEventListener('click', () => {
+            index = (index - 1 + slides.length) % slides.length;
+            showSlide(index);
+        });
 
-  wrapper.querySelector('.next').addEventListener('click', () => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-  });
-});
+        wrapper.querySelector('.next').addEventListener('click', () => {
+            index = (index + 1) % slides.length;
+            showSlide(index);
+        });
+    });
 </script>
 
+<!-- Script chuyển popup cho modal -->
+<script>
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const modalTitle = document.getElementById('modalTitle');
 
-</body>
+    document.getElementById('showRegisterLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        loginForm.classList.add('d-none');
+        registerForm.classList.remove('d-none');
+        modalTitle.textContent = 'Đăng ký';
+    });
+
+    document.getElementById('showLoginLink').addEventListener('click', (e) => {
+        e.preventDefault();
+        registerForm.classList.add('d-none');
+        loginForm.classList.remove('d-none');
+        modalTitle.textContent = 'Đăng nhập';
+    });
+</script>
+
 </html>

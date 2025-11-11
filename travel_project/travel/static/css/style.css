@@ -16,18 +16,13 @@ h2, h3, h5 {
 /* ==============================
    THANH NAVBAR
 ============================== */
-.navbar {
-    background-color: #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    font-weight: 500;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+.header .navbar {
+    box-shadow: none !important;
 }
 
 .navbar a.nav-link {
-    color: #333 !important;
     margin: 0 10px;
+    color: #333 !important;
     transition: color 0.3s;
 }
 
@@ -465,3 +460,18 @@ footer {
 
 .slideshow .prev { left: 10px; }
 .slideshow .next { right: 10px; }
+
+/* Modal */
+.modal-content {
+    border-radius: 8px;
+}
+
+.modal-body input {
+    margin-bottom: 0.75rem;
+}
+.modal-body span, .modal-body a {
+    font-size: 0.9rem;
+}
+.modal-body a {
+    cursor: pointer;
+}
