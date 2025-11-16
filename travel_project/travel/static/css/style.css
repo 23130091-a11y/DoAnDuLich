@@ -475,3 +475,7 @@ footer {
 .modal-body a {
     cursor: pointer;
 }
+
+a {
+    font-size: 1rem !important;
+}

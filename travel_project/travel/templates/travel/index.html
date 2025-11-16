@@ -189,37 +189,80 @@
                 <!-- Form Đăng nhập -->
                 <div id="loginForm">
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                        <label for="loginEmail" class="form-label">Email đăng nhập</label>
+                        <input type="email" class="form-control" id="loginEmail" name="email" placeholder="Email">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Mật khẩu">
+                        <label for="loginPassword" class="form-label">Mật khẩu</label>
+                        <input type="password" name="password" id="loginPassword" class="form-control" placeholder="Mật khẩu">
                     </div>
-                    <div class="mb-3 text-center">
+                    <div class="mb-3 text-center fs-4">
                         <span>Bạn chưa có tài khoản? </span>
                         <a href="#" id="showRegisterLink">Đăng ký</a>
                     </div>
-                    <button class="btn btn-primary w-100">Đăng nhập</button>
+                    <button id="loginBtn" class="btn btn-primary w-100">Đăng nhập</button>
                 </div>
 
                 <!-- Form Đăng ký -->
                 <div id="registerForm" class="d-none">
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Tên đăng nhập">
+                        <label for="registerEmail" class="form-label">Email đăng ký</label>
+                        <input type="email" name="email" id="registerEmail" class="form-control" placeholder="Email">
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <label for="registerPassword" class="form-label">Mật khẩu</label>
+                        <input type="password" name="password" id="registerPassword" class="form-control" placeholder="Mật khẩu">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Mật khẩu">
+                        <label for="registerConfirmPassword" class="form-label">Nhập lại mật khẩu</label>
+                        <input type="password" name="confirm_password" id="registerConfirmPassword" class="form-control" placeholder="Nhập lại mật khẩu">
                     </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Nhập lại mật khẩu">
-                    </div>
-                    <div class="mb-3 text-center">
+                    <div class="mb-3 text-center fs-4">
                         <span>Bạn đã có tài khoản? </span>
                         <a href="#" id="showLoginLink">Đăng nhập</a>
                     </div>
-                    <button class="btn btn-primary w-100">Đăng ký</button>
+                    <button id="registerBtn" class="btn btn-primary w-100">Đăng ký</button>
+                </div>
+
+                <!-- Form Sở thích / Địa điểm -->
+                <div id="preferencesForm" class="d-none">
+                    <h5 class="mb-3 text-center">Bạn thích đi du lịch ở đâu?</h5>
+
+                    <!-- Loại hình du lịch -->
+                    <div class="mb-3">
+                        <label>Loại hình du lịch yêu thích:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Biển" id="prefSea">
+                            <label class="form-check-label" for="prefSea">Biển</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Núi" id="prefMountain">
+                            <label class="form-check-label" for="prefMountain">Núi</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Thành phố" id="prefCity">
+                            <label class="form-check-label" for="prefCity">Thành phố</label>
+                        </div>
+                    </div>
+
+                    <!-- Địa điểm cụ thể -->
+                    <div class="mb-3">
+                        <label>Địa điểm bạn quan tâm:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Hà Nội" id="locHN">
+                            <label class="form-check-label" for="locHN">Hà Nội</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Hồ Chí Minh" id="locHCM">
+                            <label class="form-check-label" for="locHCM">Hồ Chí Minh</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="Đà Nẵng" id="locDN">
+                            <label class="form-check-label" for="locDN">Đà Nẵng</label>
+                        </div>
+                    </div>
+
+                    <button id="savePreferencesBtn" class="btn btn-success w-100">Hoàn tất</button>
                 </div>
 
             </div> <!-- modal-body -->
@@ -403,6 +446,7 @@
     const loginForm = document.getElementById('loginForm');
     const registerForm = document.getElementById('registerForm');
     const modalTitle = document.getElementById('modalTitle');
+    const preferencesForm = document.getElementById('preferencesForm');
 
     document.getElementById('showRegisterLink').addEventListener('click', (e) => {
         e.preventDefault();
@@ -417,6 +461,80 @@
         loginForm.classList.remove('d-none');
         modalTitle.textContent = 'Đăng nhập';
     });
+
+</script>
+
+<!-- Xử lý đăng ký đăng nhập -->
+<script>
+        // Đăng nhập
+        document.getElementById('loginBtn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email, password})
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Lưu token
+                    localStorage.setItem('token', data.token);
+
+                    alert('Đăng nhập thành công!');
+
+                    // Chuyển trang
+                    window.location.href = "/";  // chuyển về trang chủ
+                } else {
+                    alert(data.detail || data.error || 'Đăng nhập thất bại');
+                }
+            } catch (err) {
+                alert('Lỗi kết nối server: ' + err);
+            }
+        });
+
+        // Đăng ký
+        document.getElementById('registerBtn').addEventListener('click', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Mật khẩu và xác nhận mật khẩu không trùng khớp!');
+                return;
+            }
+
+            try {
+                const response = await fetch('/auth/register', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({email, password})
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Đăng ký thành công!');
+
+                    // 1. Ẩn form đăng ký
+                    document.getElementById('registerForm').classList.add('d-none');
+
+                    // 2. Hiện form câu hỏi
+                    document.getElementById('preferencesForm').classList.remove('d-none');
+
+                    // 3. Đổi tiêu đề modal
+                    document.getElementById('modalTitle').textContent = 'Sở thích du lịch';
+
+                } else {
+                    alert(JSON.stringify(data));
+                }
+            } catch (err) {
+                alert('Lỗi kết nối server: ' + err);
+            }
+        });
 </script>
 
 </html>
