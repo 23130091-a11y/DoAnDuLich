@@ -1,0 +1,46 @@
+[
+  {
+    "model": "travel.destination",
+    "pk": 1,
+    "fields": {
+      "name": "Hà Nội",
+      "slug": "ha-noi",
+      "description": "Thủ đô cổ kính với nhiều danh thắng lịch sử.",
+      "folder": "hanoi",
+      "created_at": "2025-11-16T00:00:00Z"
+    }
+  },
+  {
+    "model": "travel.destination",
+    "pk": 2,
+    "fields": {
+      "name": "Đà Nẵng",
+      "slug": "da-nang",
+      "description": "Thành phố biển năng động với cầu Rồng và bãi biển Mỹ Khê.",
+      "folder": "danang",
+      "created_at": "2025-11-16T00:00:00Z"
+    }
+  },
+  {
+    "model": "travel.destination",
+    "pk": 3,
+    "fields": {
+      "name": "Đà Lạt",
+      "slug": "da-lat",
+      "description": "Thành phố sương mù lãng mạn, ngập tràn hoa và cảnh đẹp núi rừng.",
+      "folder": "dalat",
+      "created_at": "2025-11-16T00:00:00Z"
+    }
+  },
+  {
+    "model": "travel.destination",
+    "pk": 4,
+    "fields": {
+      "name": "Phú Quốc",
+      "slug": "phu-quoc",
+      "description": "Hòn đảo ngọc với biển xanh, cát trắng và dịch vụ nghỉ dưỡng.",
+      "folder": "phuquoc",
+      "created_at": "2025-11-16T00:00:00Z"
+    }
+  }
+]

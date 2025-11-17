@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tìm kiếm: {{ query }}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
+    <div class="container py-5">
+      <h2 class="mb-3">Kết quả tìm kiếm cho: "{{ query }}"</h2>
+
+      {% if results %}
+      <div class="row g-4">
+        {% for r in results %}
+        <div class="col-md-4">
+          <div class="card">
+            {% if r.images and r.images.0 %}
+            <img
+              src="{% static 'images/' %}{{ r.images.0 }}"
+              class="card-img-top"
+              alt="{{ r.name }}"
+            />
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ r.name }}</h5>
+              <p class="card-text">{{ r.desc }}</p>
+              <a href="/" class="btn btn-outline-primary">Trở về</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted">Không tìm thấy kết quả phù hợp.</p>
+      <a href="/" class="btn btn-secondary">Trở về trang chủ</a>
+      {% endif %}
+    </div>
+  </body>
+</html>
