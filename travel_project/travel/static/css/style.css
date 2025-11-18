@@ -225,14 +225,77 @@ h2, h3, h5 {
 /* ==============================
    FOOTER
 ============================== */
-footer {
-    background-color: #0078ff;
+.footer{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    height: 200px;
+    background: #0078ff;
     color: white;
-    text-align: center;
-    padding: 15px 0;
+    padding: 25px 40px;
     font-size: 14px;
-    letter-spacing: 0.5px;
+    border-top: 1px solid #005fcc;
+
 }
+.footer-container{
+    width: 1150px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-col{
+    min-width: 100px;
+}
+
+.footer-col h3{
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: white;
+}
+
+
+.footer-col ul li{
+    font-size: 16px;
+    margin: 6px 0;
+    cursor: pointer;
+    transition: 0.25s;
+
+    color: white;
+}
+
+.footer-col p{
+    font-size: 15px;
+    margin: 8px 0;
+    line-height: 1.6;
+    color: white;
+}
+
+.footer-icons{
+    display: flex;
+    gap: 15px;
+    font-size: 20px;
+    margin-top: 15px;
+
+    color: white;
+}
+.footer-icons i{
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.footer-col ul li:hover{
+    color: #d8ecff;
+    text-underline: #d8ecff;
+}
+
+.footer-icons i:hover{
+    color: #d8ecff;
+}
+
 
 /* ============================
    HIỆU ỨNG & HIGHLIGHT GỢI Ý
@@ -479,3 +542,4 @@ footer {
 a {
     font-size: 1rem !important;
 }
+
