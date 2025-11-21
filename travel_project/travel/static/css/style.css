@@ -13,6 +13,10 @@ h2, h3, h5 {
     font-weight: 600;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 /* ==============================
    THANH NAVBAR
 ============================== */
@@ -28,6 +32,14 @@ h2, h3, h5 {
 
 .navbar a.nav-link:hover {
     color: #0078ff !important;
+}
+
+.userDropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000; /* đảm bảo popup nổi trên các phần khác */
 }
 
 /* ==============================
